@@ -52,7 +52,7 @@ public class ContaCorrente {
         if (valor <= 0) {
             throw new IllegalArgumentException("Valor do saque deve ser positivo.");
         }
-        if (valor >= saldo) {
+        if (valor > saldo) {
             throw new IllegalArgumentException("Saldo insuficiente.");
         }
         saldo -= valor;
@@ -87,7 +87,7 @@ public class ContaCorrente {
     }
     // Retorna a lista de todas as operações efetuadas até o momento
     public ArrayList<Operacao> getOperacoes() {
-        return operacoes;
+        return new ArrayList<>(operacoes);
     }
     // Retorna a lista de operações de um determinado ano/mês
     public ArrayList<Operacao> getOperacoes(int ano, int mes) {
@@ -117,6 +117,9 @@ public class ContaCorrente {
                 ", saldo=" + saldo +
                 ", ativa=" + ativa +
                 '}';
+    }
+    public char[] extratoMesAno(int mesAtual, int anoAtual) {
+        throw new UnsupportedOperationException("Unimplemented method 'extratoMesAno'");
     }
 }
 

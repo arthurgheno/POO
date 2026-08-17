@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AgenciaBancaria {
     private int numero;
     private String nome;
-    private ArrayList<ContaCorrente> contas;
+    ArrayList<ContaCorrente> contas;
 
     public AgenciaBancaria(int numero, String nome) {
         if (numero < 0) {
