@@ -1,0 +1,45 @@
+@startuml Trem
+class Trem{
+    - id: int
+
+    +engata(locomotiva:Locomativa)
+    +desengata(id: int)
+
+}
+
+class Locomotiva{
+    -id: int
+    -potencia: int
+    -maxVagoes: int
+}
+
+class Vagao{
+    -id: int
+    -qntdadePassageiros: int
+    -climatizado: boolean
+}
+
+class GaragemVagoes{
+    +estaciona(vagao: Vagao):void
+    +retira(tamMinimo: int, climatizado: boolean):Vagao
+}
+
+class GaragemLocomotivas{
+    +estaciona(locomotiva:Locomotiva): void
+    +retira(potencia: int, maxVagoes: int): Locomotiva
+}
+
+class PatioManobras{
+
+}
+
+
+Trem "1" o-- "1" Locomotiva
+Trem "1" o-- "n" Vagao
+GaragemVagoes"1" -->"n" Vagao
+GaragemLocomotivas"1" -->"n" Locomotiva
+PatioManobras "1" --> "n" Trem
+note top of Trem: Código pra fazer os comentários(Ignorar)
+@end
+
+

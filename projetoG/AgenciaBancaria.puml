@@ -1,0 +1,65 @@
+@startuml Agencia Bancaria
+
+    class AgenciaBancaria {
+        - MAXCONTAS: int = 100
+        - numero: int
+        - nome: String
+        - contas: ContaCorrente[]
+        - qtdContas: int
+        ---
+        + AgenciaBancaria(numero: int, nome: String)
+        + getNumero(): int
+        + getNome(): String
+        + cadastrarConta(conta: ContaCorrente): void
+        + recuperarConta(numeroConta: int): ContaCorrente
+        + encerrarConta(numeroConta: int): void
+    }
+
+    class ContaCorrente {
+        - numero: int
+        - correntista: String
+        - saldo: double
+        - ativa: boolean
+        - extrato: ArrayList<EntradaExtrato>
+        ---
+        + ContaCorrente(numero: int, correntista: String)
+        + getNumero(): int
+        + getCorrentista(): String
+        + getSaldo(): double
+        + getExtrato(): ArrayList<EntradaExtrato>
+        + isAtiva(): boolean
+        + deposita(valor: double): void
+        + saca(valor: double): void
+        + transfere(valor: double, contaDestino: ContaCorrente): void
+        + fecha(): void
+        + toString(): String
+    }
+
+    class EntradaExtrato {
+        - dataHora: LocalDateTime
+        - tipoOperacao: TipoOperacao
+        - valor: double
+        ---
+        + EntradaExtrato(dataHora: LocalDateTime, tipoOperacao: TipoOperacao, valor: double)
+        + getDataHora(): LocalDateTime
+        + getTipoOperacao(): TipoOperacao
+        + getValor(): double
+        + toString(): String
+    }
+
+    enum TipoOperacao {
+        DEPOSITO
+        RETIRADA
+    }
+
+    class App {
+        + main(args: String[]): void
+    }
+
+    App --> AgenciaBancaria: usa
+    AgenciaBancaria --> ContaCorrente: gerencia (contas[])
+    ContaCorrente --> ContaCorrente: transfere para
+    ContaCorrente --> EntradaExtrato: possui (extrato)
+    EntradaExtrato --> TipoOperacao: usa
+}
+@enduml
