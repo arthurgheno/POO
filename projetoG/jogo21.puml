@@ -1,0 +1,36 @@
+@startuml turma120
+
+enum Naipe{
+    PAUS, COPAS, ESPADAS, OUROS
+}
+
+enum ValorCarta{
+    AS,DOIS,TRES,QUATRO,CINCO,SEIS,SETE,OITO,NOVE,DEZ,VALETE,DAMA,REI
+}
+
+class Carta{
+    -valor: ValorCarta
+    -naipe: Naipe
+}
+
+class Deque{
+    +insereCarta(Carta carta):void
+    +soma():int
+}
+
+class Baralho{
+    -inicializa():void
+    +embaralha():void
+    +retiraDeCima():Carta
+}
+
+class Jogo{
+    +joga():void
+}
+Carta ..> Naipe
+Carta ..> ValorCarta
+Deque "1" --> "n" Carta
+Baralho "1" --> "52" Carta
+Jogo --> Deque
+Jogo --> Baralho
+@end
