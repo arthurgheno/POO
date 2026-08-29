@@ -1,0 +1,88 @@
+@startuml BlackJack
+
+class AppBJ {
+    +main(args : String[]) : void
+    -mostrarMao(titulo : String, mao : Deque) : void
+    -mostrarCartaBanca(titulo : String, mao : Deque) : void
+}
+
+class Jogo21 {
+    -soma : int
+    -baralho : Baralho
+    -maoJogador : Deque
+    -maoBanca : Deque
+    +darCartas() : void
+    +getMaoJogador() : Deque
+    +getMaoBanca() : Deque
+    +pedirCarta() : void
+    +jogadorEstourou() : boolean
+    +bancaJoga() : void
+    +getValor(carta : Carta) : int
+    +resultado() : String
+}
+
+class Baralho {
+    -cartas : Carta[]
+    -primeiraCarta : int
+    -preencher() : void
+    +embaralhar() : void
+    +comprarCarta() : Carta
+    +getQtdCartas() : int
+}
+
+class Deque {
+    -cartas : Carta[]
+    -qtd : int
+    +addCarta(carta : Carta) : void
+    +getSoma() : int
+    -getValorBase(nome : Nome) : int
+    +getQtdCartas() : int
+    +getCarta(i : int) : Carta
+}
+
+class Carta {
+    -nome : Nome
+    -naipe : Naipe
+    +getNome() : Nome
+    +getNaipe() : Naipe
+}
+
+enum Nome {
+    AS
+    DOIS
+    TRES
+    QUATRO
+    CINCO
+    SEIS
+    SETE
+    OITO
+    NOVE
+    DEZ
+    VALETE
+    DAMA
+    REI
+}
+
+enum Naipe {
+    Copas
+    Espadas
+    Ouros
+    Paus
+}
+
+' Relacionamentos
+AppBJ ..> Jogo21 : usa
+AppBJ ..> Deque : usa
+AppBJ ..> Carta : usa
+
+Jogo21 "1" *-- "1" Baralho : possui
+Jogo21 "1" *-- "2" Deque : maoJogador / maoBanca
+Jogo21 ..> Carta : usa
+
+Baralho "1" o-- "52" Carta : contém
+Deque "1" o-- "0..12" Carta : contém
+
+Carta "1" --> "1" Nome
+Carta "1" --> "1" Naipe
+
+@enduml
