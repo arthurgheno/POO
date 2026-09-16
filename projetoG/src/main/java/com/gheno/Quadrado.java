@@ -6,6 +6,6 @@ public class Quadrado extends Retangulo{
     }
 
     public int getlado(){
-        return 
+        return Math.abs(getX1()-getX2());
     }
 }
